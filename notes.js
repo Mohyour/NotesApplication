@@ -1,72 +1,80 @@
-class Notes {
-    constructor(authors, content, note_id) {
-        this.authors = author;
+class Note {
+    constructor(author, content, note_id) {
+        this.author = author;
         this.content = content;
         this.note_id = note_id;
     }
 }
 
 class NotesApplication {
-    constructor(author) {
-        this.author = author;
+    constructor() {
         this.note_list = [];
     }
 
-    create(note_content) {
-        this.note_list.push(note_content);
+    create(content) {
+        this.note_list.push(content);
     }
 
     listNotes() {
         for (var i = 0; i < this.note_list.length; i++) {
-            console.log("Note ID: ", i);
-            console.log(this.note_list[i]);
-            console.log("By ", this.author);
+            console.log("Note ID: ", this.note_list[i]["note_id"]);
+            console.log(this.note_list[i]["content"]);
             console.log(" ");
-
+            console.log("By ", this.note_list[i]["author"]);
+            console.log(" ");
         }
 
     }
 
     get(note_id) {
-        if (note_id >= this.note_list.length) {
-            return "Note Id not available";
+        for (var i = 0; i < this.note_list.length; i++){
+            if(this.note_list[i].note_id == note_id) {
+                return this.note_list[i]["content"]
+            }
         }
-        return String(this.note_list[note_id]);
+ console.log("not found")
     }
 
     search(search_text) {
         for (var i = 0; i < this.note_list.length; i++) {
-            if( this.note_list[i].indexOf(search_text) >= 0){
-                console.log("Note ID: ", i);
-                console.log(this.note_list[i]);
-                console.log("By ", this.author);
-                console.log(" ");
+            if (this.note_list[i]["content"].indexOf(search_text) >= 0) {
+            console.log("Note ID: ", this.note_list[i]["note_id"]);
+            console.log(this.note_list[i]["content"]);
+            console.log(" ");
+            console.log("By ", this.note_list[i]["author"]);
+            console.log(" ");
             }
-            else {
-                return "Note not found";
-            }
+
         }
+        console.log("Note not found")
     }
 
     delete(note_id) {
         if (note_id >= this.note_list.length) {
-            return "Note Id not available";
+            return "Note Id not valid";
         }
         else {
-        this.note_list.splice(note_id, 1);
-        return "Note deleted";
+            for (var i = 0; i < this.note_list.length; i++){
+                if(this.note_list[i].note_id == note_id) {
+                    delete this.note_list[i]
+                    return "Note deleted";
+                }
+            }
         }
     }
 
     edit(note_id, new_content) {
         if (note_id >= this.note_list.length) {
-        return "Note Id not valid";
+            return "Note Id not valid";
         }
-
         else {
-            this.note_list[note_id] = new_content;
-            return "Note ontent has been changed";
+            for (var i = 0; i < this.note_list.length; i++) {
+                if(this.note_list[i].note_id == note_id){
+                    this.note_list[i]["content"] = new_content
+                    return "Note content changed";
+                }
+            }
+        }
     }
-   }
 
 }
