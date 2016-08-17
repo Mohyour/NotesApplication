@@ -1,3 +1,5 @@
+"use strict"
+
 class Note {
     constructor(author, content, note_id) {
         this.author = author;
@@ -11,8 +13,8 @@ class NotesApplication {
         this.note_list = [];
     }
 
-    create(content) {
-        this.note_list.push(content);
+    create(note) {
+        this.note_list.push(note);
     }
 
     listNotes() {
@@ -36,6 +38,7 @@ class NotesApplication {
     }
 
     search(search_text) {
+        console.log('Showing results for', [search_text]);
         for (var i = 0; i < this.note_list.length; i++) {
             if (this.note_list[i]["content"].indexOf(search_text) >= 0) {
             console.log("Note ID: ", this.note_list[i]["note_id"]);
@@ -44,36 +47,29 @@ class NotesApplication {
             console.log("By ", this.note_list[i]["author"]);
             console.log(" ");
             }
-
+            else{
+            return ("Note not found")
         }
-        console.log("Note not found")
+        }
+
     }
 
     delete(note_id) {
-        if (note_id >= this.note_list.length) {
-            return "Note Id not valid";
-        }
-        else {
             for (var i = 0; i < this.note_list.length; i++){
                 if(this.note_list[i].note_id == note_id) {
                     delete this.note_list[i]
-                    return "Note deleted";
+                    console.log ("Note deleted");
                 }
-            }
+
         }
     }
 
     edit(note_id, new_content) {
-        if (note_id >= this.note_list.length) {
-            return "Note Id not valid";
-        }
-        else {
             for (var i = 0; i < this.note_list.length; i++) {
                 if(this.note_list[i].note_id == note_id){
                     this.note_list[i]["content"] = new_content
-                    return "Note content changed";
+                    console.log("Note content changed");
                 }
-            }
         }
     }
 
