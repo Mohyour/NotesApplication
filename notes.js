@@ -1,8 +1,8 @@
 class Notes {
-    constructor(authors, notes) {
-        this.authors = author
-        this.note_contents = note_contents
-        this.note_id = note_id
+    constructor(authors, content, note_id) {
+        this.authors = author;
+        this.content = content;
+        this.note_id = note_id;
     }
 }
 
@@ -12,7 +12,7 @@ class NotesApplication {
         this.note_list = [];
     }
 
-    create(note_content, author) {
+    create(note_content) {
         this.note_list.push(note_content);
     }
 
@@ -29,7 +29,7 @@ class NotesApplication {
 
     get(note_id) {
         if (note_id >= this.note_list.length) {
-            return "Id not available";
+            return "Note Id not available";
         }
         return String(this.note_list[note_id]);
     }
@@ -43,8 +43,30 @@ class NotesApplication {
                 console.log(" ");
             }
             else {
-                return "Note not found"
+                return "Note not found";
             }
         }
     }
+
+    delete(note_id) {
+        if (note_id >= this.note_list.length) {
+            return "Note Id not available";
+        }
+        else {
+        this.note_list.splice(note_id, 1);
+        return "Note deleted";
+        }
+    }
+
+    edit(note_id, new_content) {
+        if (note_id >= this.note_list.length) {
+        return "Note Id not valid";
+        }
+
+        else {
+            this.note_list[note_id] = new_content;
+            return "Note ontent has been changed";
+    }
+   }
+
 }
