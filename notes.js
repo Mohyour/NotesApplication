@@ -4,24 +4,20 @@ class NotesApplication {
         this.note_list = [];
     }
 
-    notes() {
-        return this.note_list;
-    }
-
     create(note_content) {
         this.note_content = note_content;
         this.note_list.push(note_content);
     }
 
-
     listNotes() {
         for (var i = 0; i < this.note_list.length; i++) {
             console.log("Note ID: ", i);
             console.log(this.note_list[i]);
+            console.log("By ", this.author);
             console.log(" ");
 
         }
-    console.log("By ", this.author);
+
     }
 
     get(note_id) {
